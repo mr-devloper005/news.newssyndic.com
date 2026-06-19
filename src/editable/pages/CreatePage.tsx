@@ -7,6 +7,8 @@ import { SITE_CONFIG, type TaskKey } from '@/lib/site-config'
 import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
 import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 import { pagesContent } from '@/editable/content/pages.content'
+import heroMediaJournalism from '@/editable/assets/hero-media-journalism.avif'
+import heroMediaLaptop from '@/editable/assets/hero-media-laptop.jpg'
 
 type DraftPost = {
   id: string
@@ -32,7 +34,7 @@ const taskIcon: Record<string, typeof FileText> = {
   sbm: ArrowRight,
 }
 
-const fieldClass = 'rounded-2xl border border-[var(--editable-border)] bg-white px-4 py-3 text-sm font-bold text-[var(--editable-page-text,#2f1d16)] outline-none transition placeholder:text-current/35 focus:border-current'
+const fieldClass = 'rounded-2xl border border-[var(--slot4-line)] bg-white px-4 py-3 text-sm font-semibold text-black outline-none transition placeholder:text-black/35 focus:border-[var(--slot4-accent)] focus:ring-4 focus:ring-[var(--slot4-accent-soft)]'
 
 const saveDraft = (draft: DraftPost) => {
   try {
@@ -84,18 +86,28 @@ export default function CreatePage() {
   if (!session) {
     return (
       <EditableSiteShell>
-        <main className="min-h-screen bg-[var(--editable-page-bg,#fff7ee)] px-4 py-16 text-[var(--editable-page-text,#2f1d16)] sm:px-6 lg:px-8">
-          <section className="mx-auto grid max-w-5xl gap-8 rounded-[2.8rem] border border-[var(--editable-border)] bg-white/75 p-7 shadow-[0_30px_90px_rgba(15,23,42,0.08)] md:grid-cols-[0.9fr_1.1fr] md:p-10">
-            <div className="flex h-full min-h-72 items-center justify-center rounded-[2rem] bg-[var(--editable-page-text,#2f1d16)] text-[var(--editable-page-bg,#fff7ee)]">
-              <Lock className="h-20 w-20 opacity-80" />
+        <main className="min-h-screen bg-white px-4 py-16 text-black sm:px-6 lg:px-8">
+          <section className="mx-auto grid max-w-6xl overflow-hidden rounded-[2rem] border border-[var(--slot4-line)] bg-white shadow-[0_30px_90px_rgba(34,20,78,0.09)] md:grid-cols-[0.95fr_1.05fr]">
+            <div className="relative min-h-80 overflow-hidden bg-[var(--slot4-accent-soft)] p-8 text-white md:p-10">
+              <img src={heroMediaJournalism.src} alt="Media distribution workspace preview" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/25 to-transparent" />
+              <div className="relative flex h-full flex-col justify-between">
+                <div className="grid h-16 w-16 place-items-center rounded-2xl bg-white/20 backdrop-blur">
+                  <Lock className="h-8 w-8" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/70">Creator access</p>
+                  <h2 className="mt-4 max-w-sm text-4xl font-normal leading-tight tracking-[-0.04em]">Sign in to open the media workspace.</h2>
+                </div>
+              </div>
             </div>
-            <div className="self-center">
-              <p className="text-xs font-black uppercase tracking-[0.28em] opacity-55">{pagesContent.create.locked.badge}</p>
-              <h1 className="mt-5 text-5xl font-black leading-[0.92] tracking-[-0.08em] sm:text-7xl">{pagesContent.create.locked.title}</h1>
-              <p className="mt-6 max-w-xl text-base font-semibold leading-8 opacity-70">{pagesContent.create.locked.description}</p>
+            <div className="self-center p-8 md:p-10">
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--slot4-accent)]">{pagesContent.create.locked.badge}</p>
+              <h1 className="mt-5 text-5xl font-normal leading-[1.02] tracking-[-0.055em] sm:text-6xl">{pagesContent.create.locked.title}</h1>
+              <p className="mt-6 max-w-xl text-base leading-8 text-black/65">{pagesContent.create.locked.description}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/login" className="inline-flex items-center gap-2 rounded-full bg-[var(--editable-page-text,#2f1d16)] px-6 py-3 text-sm font-black text-[var(--editable-page-bg,#fff7ee)]">Login <ArrowRight className="h-4 w-4" /></Link>
-                <Link href="/signup" className="inline-flex items-center gap-2 rounded-full border border-[var(--editable-border)] bg-white px-6 py-3 text-sm font-black">Sign up</Link>
+                <Link href="/login" className="inline-flex items-center gap-2 rounded-full bg-[var(--slot4-accent)] px-6 py-3 text-sm font-bold text-white">Sign In <ArrowRight className="h-4 w-4" /></Link>
+                <Link href="/signup" className="inline-flex items-center gap-2 rounded-full border border-black bg-white px-6 py-3 text-sm font-bold">Sign Up</Link>
               </div>
             </div>
           </section>
@@ -106,21 +118,30 @@ export default function CreatePage() {
 
   return (
     <EditableSiteShell>
-      <main className="min-h-screen bg-[var(--editable-page-bg,#fff7ee)] text-[var(--editable-page-text,#2f1d16)]">
-        <section className="mx-auto max-w-[var(--editable-container)] px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-          <div className="grid gap-8 rounded-[2.8rem] border border-[var(--editable-border)] bg-white/75 p-6 shadow-[0_30px_90px_rgba(15,23,42,0.08)] backdrop-blur lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
-            <aside>
-              <p className="text-xs font-black uppercase tracking-[0.28em] opacity-55">{pagesContent.create.hero.badge}</p>
-              <h1 className="mt-5 text-5xl font-black leading-[0.92] tracking-[-0.08em] sm:text-7xl">{pagesContent.create.hero.title}</h1>
-              <p className="mt-6 max-w-xl text-base font-semibold leading-8 opacity-70">{pagesContent.create.hero.description}</p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+      <main className="min-h-screen overflow-hidden bg-white text-black">
+        <section className="relative border-b border-[var(--slot4-line)]">
+          <div className="absolute left-0 top-10 h-72 w-72 rounded-full bg-[var(--slot4-accent-soft)] blur-3xl" />
+          <div className="absolute right-16 top-20 h-80 w-80 rounded-full bg-[#d9ebff] blur-3xl" />
+          <div className="relative mx-auto grid max-w-[1680px] gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[0.72fr_1fr] lg:px-12 lg:py-16">
+            <aside className="rounded-[2rem] border border-[var(--slot4-line)] bg-white/88 p-6 shadow-[0_24px_70px_rgba(34,20,78,0.08)] backdrop-blur lg:p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-[var(--slot4-accent)]">{pagesContent.create.hero.badge}</p>
+              <h1 className="mt-5 text-5xl font-normal leading-[1.02] tracking-[-0.055em] sm:text-6xl">Create a media-ready release.</h1>
+              <p className="mt-6 max-w-xl text-base leading-8 text-black/65">Choose a content lane, add distribution details, and shape a clean post for announcements, coverage, and public updates.</p>
+              <div className="mt-8 rounded-[1.5rem] bg-[var(--slot4-accent-soft)] p-4">
+                <div className="relative min-h-44 overflow-hidden rounded-[1.1rem] bg-black">
+                  <img src={heroMediaLaptop.src} alt="People reviewing media content" className="absolute inset-0 h-full w-full object-cover opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  <p className="absolute bottom-4 left-4 right-4 text-lg font-semibold leading-tight text-white">Draft, package, and route your next story.</p>
+                </div>
+              </div>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {enabledTasks.map((item) => {
                   const Icon = taskIcon[item.key] || FileText
                   const active = item.key === task
                   return (
-                    <button key={item.key} type="button" onClick={() => setTask(item.key)} className={`rounded-2xl border p-4 text-left transition ${active ? 'border-current bg-[var(--editable-page-text,#2f1d16)] text-[var(--editable-page-bg,#fff7ee)]' : 'border-[var(--editable-border)] bg-white hover:-translate-y-0.5'}`}>
+                    <button key={item.key} type="button" onClick={() => setTask(item.key)} className={`rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 ${active ? 'border-[var(--slot4-accent)] bg-[var(--slot4-accent)] text-white shadow-[0_16px_40px_rgba(143,34,244,0.18)]' : 'border-[var(--slot4-line)] bg-white hover:border-[var(--slot4-accent)]'}`}>
                       <Icon className="h-5 w-5" />
-                      <span className="mt-3 block text-sm font-black">{item.label}</span>
+                      <span className="mt-3 block text-sm font-bold">{item.label}</span>
                       <span className="mt-1 block text-xs font-semibold opacity-65">{item.description}</span>
                     </button>
                   )
@@ -128,13 +149,13 @@ export default function CreatePage() {
               </div>
             </aside>
 
-            <form onSubmit={submit} className="rounded-[2.2rem] border border-[var(--editable-border)] bg-[var(--editable-page-bg,#fff7ee)] p-5 sm:p-7">
+            <form onSubmit={submit} className="rounded-[2rem] border border-[var(--slot4-line)] bg-white p-5 shadow-[0_24px_70px_rgba(34,20,78,0.08)] sm:p-7 lg:p-8">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.22em] opacity-50">Create {activeTask?.label || 'post'}</p>
-                  <h2 className="mt-1 text-3xl font-black tracking-[-0.06em]">{pagesContent.create.formTitle}</h2>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--slot4-accent)]">Create {activeTask?.label || 'post'}</p>
+                  <h2 className="mt-2 text-4xl font-normal tracking-[-0.04em]">{pagesContent.create.formTitle}</h2>
                 </div>
-                <span className="rounded-full bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em]">{session.name}</span>
+                <span className="rounded-full bg-[var(--slot4-accent-soft)] px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--slot4-accent)]">{session.name}</span>
               </div>
 
               <div className="mt-6 grid gap-4">
@@ -150,12 +171,12 @@ export default function CreatePage() {
 
               {created ? (
                 <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">
-                  <p className="flex items-center gap-2 text-sm font-black"><CheckCircle2 className="h-5 w-5" /> {pagesContent.create.successTitle}</p>
+                  <p className="flex items-center gap-2 text-sm font-bold"><CheckCircle2 className="h-5 w-5" /> {pagesContent.create.successTitle}</p>
                   <p className="mt-1 text-sm font-semibold opacity-80">{created.title}</p>
                 </div>
               ) : null}
 
-              <button type="submit" className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[var(--editable-page-text,#2f1d16)] px-6 text-sm font-black uppercase tracking-[0.18em] text-[var(--editable-page-bg,#fff7ee)] transition hover:-translate-y-0.5">
+              <button type="submit" className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[var(--slot4-accent)] px-6 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black">
                 <Send className="h-4 w-4" /> {pagesContent.create.submitLabel}
               </button>
             </form>
