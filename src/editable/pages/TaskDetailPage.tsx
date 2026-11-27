@@ -134,7 +134,6 @@ function BackLink({ task }: { task: TaskKey }) {
 
 function ArticleDetail({ task, post, related, comments }: { task: TaskKey; post: SitePost; related: SitePost[]; comments: Array<{ id: string; name: string; comment: string; createdAt: string }> }) {
   const images = getImages(post)
-  const published = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''
   return (
     <section className="bg-white">
       <header className="border-b border-[var(--slot4-line)]">
@@ -142,7 +141,6 @@ function ArticleDetail({ task, post, related, comments }: { task: TaskKey; post:
           <BackLink task={task} />
           <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--slot4-line)] pt-4 text-[11px] font-bold uppercase tracking-[0.16em]">
             <span className="rounded-full bg-[var(--slot4-accent-soft)] px-4 py-2 text-[var(--slot4-accent)]">{categoryOf(post, 'News')}</span>
-            {published ? <time>{published}</time> : null}
           </div>
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-end">
             <div>
